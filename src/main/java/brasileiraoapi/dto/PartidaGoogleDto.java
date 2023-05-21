@@ -13,9 +13,9 @@ import lombok.Setter;
 public class PartidaGoogleDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String numProc;
-	private String statusPartida;
-	private String tempoPartida;
+	private String numProc; 
+	private String statusPartida; //ok
+	private String tempoPartida; //ok 
 	
 	//INFORMAÇÕES EQUIPE CASA
 	private String nomeEquipeCasa;
