@@ -32,3 +32,29 @@ public class PartidaGoogleDto implements Serializable {
 
 
 }
+
+/*
+*private String numProc; 
+	private String statusPartida; //ok
+	private String tempoPartida; //ok 
+	
+	//INFORMAÇÕES EQUIPE CASA
+	private String nomeEquipeCasa; ok
+	private String urlLogoEquipeCasa;
+	private Integer placarEquipeCasa; //ok
+	private String golsEquipeCasa; OK
+	private String placarEstendidoEquipeCasa; ok
+	//INFORMAÇÕES EQUIPE VISITANTE
+		private String nomeEquipeVisitante; ok
+		private String urlLogoEquipeVisitante;
+		private Integer placarEquipeVisitante; //ok
+		private String golsEquipeVisitante; OK
+		private String placarEstendidoEquipeVisitante; ok
+
+*/
+
+
+
+
+
+

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
+import org.hibernate.dialect.identity.H2FinalTableIdentityColumnSupport;
 import org.hibernate.engine.query.spi.ReturnMetadata;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,9 +13,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import brasileiraoapi.dto.PartidaGoogleDto;
 
+@Service
 public class ScrappingUtil {
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(ScrappingUtil.class);
@@ -23,17 +26,18 @@ public class ScrappingUtil {
 	private static final String CASA = "casa";
 	private static final String VISITANTE = "visitante";
 
-	public static void main(String[] args) {
-
-		String url = BASE_URL_GOOGLE + "brasil+vs+croácia+2022" + COMPLEMENTO_URL_GOOGLE;
-
-		ScrappingUtil scrappin = new ScrappingUtil();
-
-		// METODO PARA FAZER A CONSULTA.
-		scrappin.getInfoPt(url);
-
-	}
-
+	/*
+	 * public static void main(String[] args) {
+	 * 
+	 * //String url = BASE_URL_GOOGLE + "brasil+vs+croácia+2022" +
+	 * COMPLEMENTO_URL_GOOGLE;
+	 * 
+	 * ScrappingUtil scrappin = new ScrappingUtil(); String url =
+	 * scrappin.montaUrlGoogle("Vasco da Gama", "Flamengo"); // METODO PARA FAZER A
+	 * CONSULTA. scrappin.getInfoPt(url);
+	 * 
+	 * }
+	 */
 	public PartidaGoogleDto getInfoPt(String url) {
 
 		PartidaGoogleDto partida = new PartidaGoogleDto();
@@ -49,42 +53,50 @@ public class ScrappingUtil {
 
 			// Recuperar Status da partida.
 			Status statusPartida = getStatusPt(document);
+			partida.setStatusPartida(statusPartida.toString());
 			if (statusPartida != Status.PARTIDA_NAO_INICIADA) {
 				// Recupera tempo da partida,
 				String tempoPartida = getTempPt(document);
+				partida.setTempoPartida(tempoPartida);
 				// LOGGER.info("Tempo da partida: {}", tempoPartida);
 
 				// Recupera placar equipe de casa.
 				Integer recPlacEquipCasa = getPlacEquipCasa(document);
+				partida.setPlacarEquipeCasa(recPlacEquipCasa);
 				LOGGER.info("Placar equipe casa: {}", recPlacEquipCasa);
 				// Recupera placar equipe visitante
 				Integer recPlacEquipVisit = getPlacEquipVisit(document);
+				partida.setPlacarEquipeVisitante(recPlacEquipVisit);
 				LOGGER.info("Placar equipe Visitante: {}", recPlacEquipVisit);
 				// Recupera marcadores casa
 				String recMarcCasa = getMarcCasa(document);
+				partida.setGolsEquipeCasa(recMarcCasa);
 				LOGGER.info("Marcantes casa: {}", recMarcCasa);
 				// Recupera marcadores visitantes
 				String recMarcVisit = getMarcVisit(document);
+				partida.setGolsEquipeVisitante(recMarcVisit);
 				LOGGER.info("Marcantes visitantes: {}", recMarcVisit);
-				
+				// PLACAR ESTENDIDO EQUIPE DE CASA
 				Integer placPenEqpCas = getPlacEstEqpCas(document, CASA);
-				LOGGER.info("Gols estendido equipe casa {}",placPenEqpCas);
-				
+				partida.setPlacarEstendidoEquipeCasa(placPenEqpCas.toString());
+				LOGGER.info("Gols estendido equipe casa {}", placPenEqpCas);
+
+				// PLACAR ESTENDIDO QUIPE VISITANTE
 				Integer placPenEqpVisit = getPlacEstEqpCas(document, VISITANTE);
-				LOGGER.info("Gols estendido equipe visitante {}", placPenEqpVisit);	
+				partida.setPlacarEstendidoEquipeVisitante(placPenEqpCas.toString());
+				LOGGER.info("Gols estendido equipe visitante {}", placPenEqpVisit);
 			}
-
+			// NOME DA EQUIPE DE CASA
 			String getNomEquip = getNomEquipCasa(document);
+			partida.setNomeEquipeCasa(getNomEquip);
 			LOGGER.info("Nome da equipe casa: {}", getNomEquip);
-
+			// NOME DA EQUIPE VISITANTE
 			String getNomEquipVisit = getNomEquipvisit(document);
+			partida.setNomeEquipeVisitante(getNomEquipVisit);
 			LOGGER.info("Nome da equipe visitante: {}", getNomEquipVisit);
-
-			/*
-			 * //RECUPERA URL LOGO EQUIP CASA. String getUrlLogEquipCasa =
-			 * recLogEqpCasa(document);
-			 * LOGGER.info("Logo equipe casa: {}",getUrlLogEquipCasa);
-			 */
+			
+			
+			return partida;
 
 		} catch (IOException e) {
 
@@ -92,7 +104,7 @@ public class ScrappingUtil {
 
 		}
 
-		return partida;
+		return null;
 	}
 
 	// BLOCO STATUS DA PARTIDA//
@@ -293,5 +305,18 @@ public class ScrappingUtil {
 			valor = 0;
 		}
 		return valor;
+	}
+
+	public String montaUrlGoogle(String eqpCasa, String eqpVisit) {
+		try {
+			String eqpCasaString = eqpCasa.replace(" ", "+").replace("-", "+");
+			String eqpVisitString = eqpVisit.replace(" ", "+").replace("-", "+");
+
+			return BASE_URL_GOOGLE + eqpCasaString + "x" + eqpVisitString + COMPLEMENTO_URL_GOOGLE;
+		} catch (Exception e) {
+			LOGGER.info("Erro: {}", e.getMessage());
+		}
+
+		return null;
 	}
 }
