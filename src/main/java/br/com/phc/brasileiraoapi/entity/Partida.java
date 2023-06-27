@@ -1,6 +1,6 @@
 package br.com.phc.brasileiraoapi.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,7 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -34,14 +34,18 @@ public class Partida {
 	
 	@Column(name = "partida_id")
 	private long id;
+	
 	@Transient
 	private String statusPartida;
-	@ManyToMany
+	
+    @ManyToOne
 	@JoinColumn(name="equipe_casa_id")
 	private Equipe equipeCasa;
-	@ManyToMany
+	
+	@ManyToOne
 	@JoinColumn(name="equipe_visitante_id")
 	private Equipe equipeVisitante;
+	
 	@Column(name = "placar_equipe_casa")
 	private Integer plcarEqpCasa;
 	@Column(name = "placar_equipe_visitante")

@@ -1,5 +1,6 @@
 package br.com.phc.brasileiraoapi.entity;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +12,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
-@Table(name="equipe")
+@Table(name = "Equipe")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,9 +24,10 @@ public class Equipe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+
 	@Column(name="equipe_id")
 	private long id;
+    
 	@Column(name="equipe_nome")
 	private String nomeEquipeString;	
 }
