@@ -14,8 +14,8 @@ public class PartidaGoogleDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String numProc; 
-	private String statusPartida; //ok
-	private String tempoPartida; //ok 
+	private String statusPartida;
+	private String tempoPartida; 
 	
 	//INFORMAÇÕES EQUIPE CASA
 	private String nomeEquipeCasa;
@@ -30,28 +30,8 @@ public class PartidaGoogleDto implements Serializable {
 		private String golsEquipeVisitante;
 		private String placarEstendidoEquipeVisitante;
 
-
 }
 
-/*
-*private String numProc; 
-	private String statusPartida; //ok
-	private String tempoPartida; //ok 
-	
-	//INFORMAÇÕES EQUIPE CASA
-	private String nomeEquipeCasa; ok
-	private String urlLogoEquipeCasa;
-	private Integer placarEquipeCasa; //ok
-	private String golsEquipeCasa; OK
-	private String placarEstendidoEquipeCasa; ok
-	//INFORMAÇÕES EQUIPE VISITANTE
-		private String nomeEquipeVisitante; ok
-		private String urlLogoEquipeVisitante;
-		private Integer placarEquipeVisitante; //ok
-		private String golsEquipeVisitante; OK
-		private String placarEstendidoEquipeVisitante; ok
-
-*/
 
 
 

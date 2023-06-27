@@ -2,11 +2,8 @@ package br.com.phc.brasileiraoapi.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
-import org.hibernate.dialect.identity.H2FinalTableIdentityColumnSupport;
-import org.hibernate.engine.query.spi.ReturnMetadata;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,18 +23,6 @@ public class ScrappingUtil {
 	private static final String CASA = "casa";
 	private static final String VISITANTE = "visitante";
 
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * //String url = BASE_URL_GOOGLE + "brasil+vs+croácia+2022" +
-	 * COMPLEMENTO_URL_GOOGLE;
-	 * 
-	 * ScrappingUtil scrappin = new ScrappingUtil(); String url =
-	 * scrappin.montaUrlGoogle("Vasco da Gama", "Flamengo"); // METODO PARA FAZER A
-	 * CONSULTA. scrappin.getInfoPt(url);
-	 * 
-	 * }
-	 */
 	public PartidaGoogleDto getInfoPt(String url) {
 
 		PartidaGoogleDto partida = new PartidaGoogleDto();
@@ -220,26 +205,6 @@ public class ScrappingUtil {
 
 		return nomEqpVisit;
 	}
-
-	/*
-	 * 
-	 * GOOGLE BLOQUEOU A CAPTURA DE LOGOS.
-	 * 
-	 * public String recLogEqpCasa(Document document) {
-	 * 
-	 * org.jsoup.nodes.Element elemento =
-	 * document.selectFirst("div[class=\"imso_mh__t-l-cont kno-fb-ctx\"]"); String
-	 * urlLogo = "https:" +
-	 * elemento.select("img[class=imso_btl__mh-logo]").attr("src"); String
-	 * encodedData = urlLogo.split(",")[1]; byte[] decodedData =
-	 * Base64.getDecoder().decode(encodedData); String decString = new
-	 * String(decodedData);
-	 * 
-	 * // try (FileOutputStream file = new FileOutputStream("imagem.gif")) {
-	 * //file.write(decodedData);
-	 * 
-	 * return decString;}
-	 */
 
 	public Integer getPlacEquipCasa(Document document) {
 		String getPlacCasInteger = document.select("div[class=\"imso_mh__l-tm-sc imso_mh__scr-it imso-light-font\"]")
