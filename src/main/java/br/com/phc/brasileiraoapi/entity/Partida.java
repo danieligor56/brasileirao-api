@@ -4,7 +4,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+//import io.swagger.annotations.ApiModelProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,7 +60,7 @@ public class Partida {
 	@Column(name = "placar_estendido_eqp_visitante")
 	private Integer placarEstendidoEqpVisitante;
 	
-	@ApiModelProperty(example = "dd/MM/yyyy HH:mm")
+	@Schema(example = "dd/MM/yyyy HH:mm")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm",timezone = "America/Sao_Paulo")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_hora_partida")
