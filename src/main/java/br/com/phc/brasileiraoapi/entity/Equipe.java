@@ -31,3 +31,11 @@ public class Equipe {
 	@Column(name="equipe_nome")
 	private String nomeEquipeString;	
 }
+
+
+
+
+
+
+
+
